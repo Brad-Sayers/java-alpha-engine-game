@@ -1,9 +1,6 @@
-import edu.digipen.InputManager;
 import edu.digipen.gameobject.GameObject;
 import edu.digipen.gameobject.ObjectManager;
 import edu.digipen.level.GameLevel;
-
-import java.awt.event.KeyEvent;
 
 public class Level1 extends GameLevel
 {
@@ -21,7 +18,7 @@ public class Level1 extends GameLevel
 
 	@Override public void update(float v)
 	{
-		if (InputManager.isPressed(KeyEvent.VK_SPACE))
+		/*if (InputManager.isPressed(KeyEvent.VK_SPACE))
 		{
 			GameObject ClutchLight = new GameObject("ClutchLight",1920,1080,"ClutchLight.png");
 		}
@@ -46,6 +43,7 @@ public class Level1 extends GameLevel
 			ObjectManager.removeAllObjectsByName("BrakeLight");
 		}
 		System.out.println();
+		*/
 	}
 
 	@Override public void uninitialize()
