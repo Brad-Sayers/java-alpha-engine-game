@@ -10,6 +10,8 @@ public class Level1 extends GameLevel
 	@Override public void create()
 	{
 		GameObject hud = new GameObject("Hud",1920,1080,"Hud.png");
+		GameObject car = new Player();
+		ObjectManager.addGameObject(car);
 	}
 
 	@Override public void initialize()
@@ -43,7 +45,7 @@ public class Level1 extends GameLevel
 		{
 			ObjectManager.removeAllObjectsByName("BrakeLight");
 		}
-
+		System.out.println();
 	}
 
 	@Override public void uninitialize()

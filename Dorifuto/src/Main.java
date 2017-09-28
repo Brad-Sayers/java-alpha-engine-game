@@ -8,6 +8,7 @@ public class Main
         while(Game.getQuit() == false)
         {
             Game.update();
+
         }
         Game.destroy();
     }
