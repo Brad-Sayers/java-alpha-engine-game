@@ -10,6 +10,8 @@ public class Player extends GameObject
 	{
 		super("ae86", 200, 110, "ae86.png");
 		setPositionX(-828);
+		setRectangleCollider(45,45);
+
 	}
 
 	public Vec2 direction = new Vec2(1.0f,0.0f);
@@ -74,12 +76,51 @@ public class Player extends GameObject
 			position.subtract(Vec2.scale(direction, movementSpeed));
 			setPosition(position);
 		}
-
-		//Side lights
-
-
-		//Pause menu
-
-
 	}
+	//collision
+	@Override
+	public void collisionReaction(GameObject otherObject)
+	{
+		float x1 = getPositionX();
+		float y1 = getPositionY();
+		float x2 = otherObject.getPositionX();
+		float y2 = otherObject.getPositionY();
+
+		float halfW1 = getCollider().getWidth()/2;
+		float halfW2 = otherObject.getCollider().getWidth()/2;
+		float halfH1 = getCollider().getHeight()/2;
+		float halfH2 = otherObject.getCollider().getHeight()/2;
+
+		float critSlope = Math.abs((halfH1+halfH2)/(halfW1+halfW2));
+		float curSlope = Math.abs((y1-y2)/(x1-x2));
+
+		if(otherObject.getName() == "Hud")
+		{
+			if(curSlope < critSlope)
+			{
+				if (x1 - x2 < halfW1 + halfW2 && x1 > x2)
+				{
+					float adjust = (halfW1 + halfW2) - (x1 - x2);
+					setPositionX(getPositionX() + adjust + 1);
+				} else if (x2 - x1 < halfW1 + halfW2 && x2 > x1)
+				{
+					float adjust = (halfW1 + halfW2) - (x2 - x1);
+					setPositionX(getPositionX() - adjust - 1);
+				}
+			}
+			else
+			{
+				if (y1 - y2 < halfH1 + halfH2 && y1 > y2)
+				{
+					float adjust = (halfH1 + halfH2) - (y1 - y2);
+					setPositionY(getPositionY() + adjust + 1);
+				} else if (y2 - y1 < halfH1 + halfH2 && y2 > y1)
+				{
+					float adjust = (halfH1 + halfH2) - (y2 - y1);
+					setPositionY(getPositionY() - adjust - 1);
+				}
+			}
+		}
+	}
+
 }
