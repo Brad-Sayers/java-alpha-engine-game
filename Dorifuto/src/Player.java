@@ -1,6 +1,7 @@
 import edu.digipen.InputManager;
 import edu.digipen.gameobject.GameObject;
 import edu.digipen.math.Vec2;
+import edu.digipen.physics.Force;
 
 import java.awt.event.KeyEvent;
 
@@ -11,6 +12,7 @@ public class Player extends GameObject
 		super("ae86", 200, 110, "ae86.png");
 		setPositionX(-828);
 		setRectangleCollider(45,45);
+		setMass(5);
 
 	}
 
@@ -18,10 +20,17 @@ public class Player extends GameObject
 	int pauseCount = 0;
 	@Override public void update(float v)
 	{
-		float movementSpeed = 3.0f;
+		float movementSpeed = 2.0f;
 		float rotationSpeed = 1.0f;
+		float x = 0;
+		float y = 0;
+		float speed = 25;
 
-		boolean moving = false;
+		Vec2 forceVector = new Vec2(x,y);
+		forceVector.scale(speed);
+		addForce(new Force(forceVector, .05f));
+
+
 		//Wheels Cut Left, Reverse
 		if (InputManager.isPressed(KeyEvent.VK_A) && InputManager.isPressed(KeyEvent.VK_S))
 		{
@@ -76,6 +85,7 @@ public class Player extends GameObject
 			position.subtract(Vec2.scale(direction, movementSpeed));
 			setPosition(position);
 		}
+
 	}
 	//collision
 	@Override
